@@ -1,4 +1,18 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+使用create-react-app 创建项目
+```$xslt
+npm install -g create-react-app   //本地全局安装 react 脚手架
+create-react-app webapp           //通过脚手架指令 创建 react webapp,  注意名字不能有大写字母，现在就可以直接跑了
+npm run eject                     //新版本的脚手架把配置文件等都以依赖的形式放到 node_modules 中了， eject 一下，把配置信息释放出来
+scripts/start.js                  //修改一下端口号，默认是3000，改成你想要的
+npm i                             //装一下依赖
+```
+参考文章和项目
+
+[快速搭建react项目骨架](https://www.cnblogs.com/pengfei-nie/p/10443310.html).
+[react-pxq](https://github.com/bailicangdu/react-pxq)
+
+
+This project was bootstrapped with [Create React Home](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
@@ -39,7 +53,7 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 
 ## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+You can learn more in the [Create React Home documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
@@ -51,7 +65,7 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/co
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
 
-### Making a Progressive Web App
+### Making a Progressive Web Home
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
 

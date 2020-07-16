@@ -1,0 +1,138 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "properties": {
+    "user_id": {
+      "oneOf": [{
+        "type": "integer"
+      }, {
+        "type": "string"
+      }],
+      "description": "用户编号 int64"
+    },
+    "user_name": {
+      "type": "string",
+      "description": "用户名"
+    },
+    "user_nickname": {
+      "type": "string",
+      "description": "用户昵称"
+    },
+    "user_country": {
+      "type": "string",
+      "description": "用户国籍"
+    },
+    "user_gender": {
+      "type": "integer",
+      "description": "用户性别 int32",
+      "enum": [1, 2],
+      "enumNames": ["男", "女"]
+    },
+    "user_credits": {
+      "type": "number",
+      "description": "用户积分 double"
+    },
+    "is_admin": {
+      "type": "boolean",
+      "description": "是否是管理员 bool"
+    },
+    "auth_code": {
+      "type": "string",
+      "description": "授权码 bytes"
+    },
+    "user_balance": {
+      "type": "number",
+      "description": "用户余额 float"
+    },
+    "user_hobby": {
+      "type": "string",
+      "enum": ["music", "basketball"],
+      "description": "用户爱好  enum"
+    },
+    "lucky_numbers": {
+      "items": {
+        "type": "integer"
+      },
+      "type": "array",
+      "description": "幸运数字  repeated"
+    },
+    "user_email": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "type": "object",
+      "description": "用户email   map"
+    },
+    "user_weight": {
+      "additionalProperties": {
+        "type": "integer"
+      },
+      "type": "object",
+      "description": "用户体重     map"
+    },
+    "user_num": {
+      "additionalProperties": {
+        "$ref": "services.UserLoginResponse.PhoneNumber",
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "type": "object",
+      "description": "测试map"
+    },
+    "login_status": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["foo", "bar", "fuzz", "qux"],
+        "oneOf": [
+          { "value": "daily", "label": "Daily New" },
+          { "value": "promotion", "label": "Promotion" }
+        ]
+      },
+      "description": "登录状态"
+    },
+    "phones": {
+        "title": "手机号码类型",
+        "$ref": "#/definitions/services.UserLoginResponse.PhoneNumber"
+    },
+    "last_update_date": {
+      "properties": {
+        "seconds": {
+          "enum": [1, 2],
+          "enumNames": ["昨天", "今天"],
+          "title": "seconds",
+          "description": "Represents seconds of UTC time since Unix epoch\n 1970-01-01T00:00:00Z. Must be from 0001-01-01T00:00:00Z to\n 9999-12-31T23:59:59Z inclusive."
+        },
+        "nanos": {
+          "type": "integer",
+          "title": "nanos",
+          "description": "Non-negative fractions of a second at nanosecond resolution. Negative\n second values with fractions must still have non-negative nanos values\n that count forward in time. Must be from 0 to 999,999,999\n inclusive."
+        }
+      },
+      "type": "object",
+      "title": "last_update_date",
+      "description": "最后更新日期"
+    }
+  },
+  "type": "object",
+  "description": "用户登录响应",
+  "definitions": {
+    "services.UserLoginResponse.PhoneNumber": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "properties": {
+        "number": {
+          "type": "string",
+          "description": "手机号码"
+        },
+        "type": {
+          "enum": [1, 2],
+          "enumNames": ["座机", "手机"],
+          "description": "手机号码类型"
+        }
+      },
+      "additionalProperties": true,
+      "type": "object",
+      "description": "手机号码类型",
+      "id": "services.UserLoginResponse.PhoneNumber"
+    }
+  }
+}

@@ -5,13 +5,17 @@ import './index.css';
 import store from './store/index'
 import BasicRoute from './router/index';
 import * as serviceWorker from './serviceWorker';
+import 'antd/dist/antd.css';
+import zhCN from 'antd/es/locale/zh_CN';
+import moment from 'moment';
+import 'moment/locale/zh-cn';
+
+moment.locale('zh-cn');
 
 ReactDOM.render(
-  <React.StrictMode>
       <Provider store={store}>
           <BasicRoute />
-      </Provider>
-  </React.StrictMode>,
+      </Provider>,
   document.getElementById('root')
 );
 

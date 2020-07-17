@@ -1,0 +1,14 @@
+{
+    "data":{
+        "hello.proto":{
+            "0":{
+                "services.HelloService":{
+                    "SayHello":"{"$schema":"http://json-schema.org/draft-04/schema#","properties":{"name":{"type":"string"}},"additionalProperties":true,"type":"object"}",
+                    "Streaming":"{"$schema":"http://json-schema.org/draft-04/schema#","properties":{"name":{"type":"string"}},"additionalProperties":true,"type":"object"}"
+                }
+            }
+        }
+    },
+    "msg":"success",
+    "ret":0
+}

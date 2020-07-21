@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Upload, message, Button } from 'antd';
 import { InboxOutlined } from '@ant-design/icons';
-
+import { uploadfile } from '../../request/grpc'
 const { Dragger } = Upload;
 
 export default class GrpcUpload extends Component{
@@ -10,66 +10,45 @@ export default class GrpcUpload extends Component{
         this.state= {
             fileList: [],
             uploading: false,
-            // upload: {
-            //     name: 'file',
-            //     multiple: true,
-            //     action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
-            //     onChange(info) {
-            //         const { status } = info.file;
-            //         if (status !== 'uploading') {
-            //             console.log(info.file, info.fileList);
-            //         }
-            //         if (status === 'done') {
-            //             message.success(`${info.file.name} file uploaded successfully.`);
-            //         } else if (status === 'error') {
-            //             message.error(`${info.file.name} file upload failed.`);
-            //         }
-            //     },
-            // }
         }
 
     }
     componentDidMount(){
     }
-    submitUpload = event =>{
-        event.preventDefault();
-
+    submitUpload = async(event) =>{
+        event.stopPropagation();
         const { fileList } = this.state;
         const formData = new FormData();
         fileList.forEach(file => {
-            formData.append('files[]', file);
+            formData.append('file', file);
         });
-
         this.setState({
             uploading: true,
         });
+        const config = {
+            headers: { "Content-Type": "multipart/form-data" },
+        };
+        const res = await uploadfile(formData, config);
+        console.log(res,'1111')
+        if(res.ret === 0){
+            this.setState({
+                fileList: [],
+                uploading: false,
+            });
+            message.success('upload successfully.');
+            this.props.uploadStep(this,res.data);
+        }else {
+            this.setState({
+                uploading: false,
+            });
+            message.error('upload failed.');
+        }
 
-        // You can use any AJAX library you like
-        reqwest({
-            url: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
-            method: 'post',
-            processData: false,
-            data: formData,
-            success: () => {
-                this.setState({
-                    fileList: [],
-                    uploading: false,
-                });
-                message.success('upload successfully.');
-            },
-            error: () => {
-                this.setState({
-                    uploading: false,
-                });
-                message.error('upload failed.');
-            },
-        });
-
-        this.props.uploadStep(this);
     };
     render() {
         const { uploading, fileList } = this.state;
         const props = {
+            multiple: true,
             onChange({ file, fileList }) {
                 if (file.status !== 'uploading') {
                     console.log(file, fileList);
@@ -85,18 +64,21 @@ export default class GrpcUpload extends Component{
                     };
                 });
             },
-            beforeUpload(file) {
-                const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
-                if (!isJpgOrPng) {
-                    message.error('You can only upload JPG/PNG file!');
+            beforeUpload: file => {
+                console.log(file)
+                const index = file.name.lastIndexOf(".");
+                const protoext = file.name.substr(index + 1);
+                const isproto = protoext === 'proto';
+                if (!isproto) {
+                    message.error('You can only upload proto file!');
                 }
-                const isLt2M = file.size / 1024 / 1024 < 2;
-                if (!isLt2M) {
-                    message.error('Image must smaller than 2MB!');
+                const isLimit = file.size / 1024 / 1024 < 10;
+                if (!isLimit) {
+                    message.error('proto must smaller than 10MB!');
                 }
-                return isJpgOrPng && isLt2M;
+                return isproto && isLimit;
             },
-            customRequest: file=>{
+            customRequest: ({file})=>{
                 const index = file.name.lastIndexOf(".");
                 const ext = file.name.substr(index + 1);
                 if (ext != "proto") {
@@ -111,14 +93,13 @@ export default class GrpcUpload extends Component{
         };
         return(
             <div className="m-grpc-upload">
-                <Dragger {...this.state.upload}>
+                <Dragger {...props}>
                     <p className="ant-upload-drag-icon">
                         <InboxOutlined />
                     </p>
-                    <p className="ant-upload-text">Click or drag file to this area to upload</p>
+                    <p className="ant-upload-text">点击或拖拽文件</p>
                     <p className="ant-upload-hint">
-                        Support for a single or bulk upload. Strictly prohibit from uploading company data or other
-                        band files
+                        支持多选，文件格式仅支持proto文件
                     </p>
                 </Dragger>
                 <div className="u-btn">
@@ -128,7 +109,7 @@ export default class GrpcUpload extends Component{
                         disabled={fileList.length === 0}
                         loading={uploading}
                     >
-                        {uploading ? 'Uploading' : 'Start Upload'}
+                        {uploading ? 'Uploading' : '提交文件'}
                     </Button>
                 </div>
 

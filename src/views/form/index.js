@@ -6,7 +6,7 @@ import { withTheme } from '@rjsf/core';
 import { Theme as AntDTheme } from '@rjsf/antd';
 import { Row, Col, Button } from 'antd';
 // Make modifications to the theme with your own fields and widgets
-const data = require('../../request/data');
+const data = require('../../mock/data');
 const Form = withTheme(AntDTheme);
 
 export default class FormDemo extends Component{

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {message} from 'antd';
 /**
  * 主要params参数
  * @params method {string} 方法名
@@ -18,6 +19,7 @@ const CancelToken = axios.CancelToken;
 const source = CancelToken.source();
 
 const fetch = axios.create({
+    baseURL: '/api',
     // baseURL: 'http://front.wetest.qq.com/',
     timeout: 150000,
     cancelToken: source.token,
@@ -34,6 +36,7 @@ fetch.interceptors.request.use(function(config) {
         // x-www-form-urlencoded
         config.headers['Content-Type'] = 'application/x-www-form-urlencoded';
     }
+    console.log(config,'222')
     return config;
 }, function(error) {
     return Promise.reject(error);
@@ -41,11 +44,17 @@ fetch.interceptors.request.use(function(config) {
 
 // 添加一个响应拦截器
 fetch.interceptors.response.use(response => {
+    // 对响应数据做点什么
+    const { ret } = response.data;
+    if (ret !== 0) {
+        message.error(response.data.msg);
+    }
     return response.data     // 其他的不要了，只拿data就好
 }, error => {
+    message.error(error.response.data.msg);
     console.log(error.response)
     if (error.response.status === 401) {
-        window.location.pathname = '/login'
+
     }
     // ......在做别的统一处理
     return Promise.reject(error);

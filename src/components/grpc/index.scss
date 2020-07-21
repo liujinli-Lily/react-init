@@ -1,30 +1,82 @@
-.common-con-top{
+.m-containter{
   width: 1200px;
   padding: 20px 0;
   margin: 0 auto;
+  padding-bottom: 150px;
 }
 .mod-row-left{
   border: 1px solid #e0e0e0;
   padding: 10px;
+  min-height: 200px;
 }
 .mod-json-view{
-  //position: fixed;
-  //right: 0;
-  //top: 0;
-  position:fixed; margin:10px 0 0 20px;
+  padding:  0 15px;
+  position: fixed;
+  width: 400px;
   border: 1px solid #e0e0e0;
+  border-left: 0;
 }
-.mod-ant-btn{
-  .ant-btn{
-    margin-right: 8px;
-    margin-bottom: 12px;
-  }
 
-}
 .m-grpc-upload{
   padding: 30px;
   .u-btn{
     margin: 20px auto 0;
     text-align: center;
   }
+}
+.m-top-form{
+  padding: 15px 0 30px;
+  .m-item{
+    display: inline-block;
+    width: 250px;
+    margin-right: 20px;
+  }
+}
+.m-bottom{
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 80px;
+  left: 0;
+  right: 0;
+  padding: 20px 0;
+  border-top: 1px solid #e0e0e0;
+  background: #fff;
+  z-index: 10;
+  -webkit-box-shadow: -13px -14px 5px -9px rgba(0,0,0,0.51);
+  -moz-box-shadow: -13px -14px 5px -9px rgba(0,0,0,0.51);
+  box-shadow: -13px -14px 5px -9px rgba(0,0,0,0.51);
+  .mod-ant-btn{
+    width: 1200px;
+    text-align: center;
+    margin: 0 auto;
+    .ant-btn{
+      margin-right: 8px;
+      margin-bottom: 12px;
+    }
+
+  }
+}
+
+
+._json-editor {
+  margin-top: 45px;
+}
+._json-editor .jsoneditor-mode-code, .jsoneditor {
+  border: none;
+}
+._json-editor .jsoneditor-statusbar {
+  display: none;
+}
+._json-editor .jsoneditor-menu {
+  display: none;
+}
+._json-editor div.jsoneditor-outer.has-main-menu-bar {
+  padding-top: 0;
+}
+
+
+.jsoneditor-react-container {
+  width: 100%;
+  height: 100%;
 }

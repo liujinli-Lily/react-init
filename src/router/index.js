@@ -2,7 +2,7 @@ import React from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import asyncComponent from "../utils/asyncComponents";
 import home from "../views/home/home";
-import MainLayout from '../components/common/MainLayout'
+// import MainLayout from '../components/common/MainLayout'
 const form = asyncComponent(() => import("../views/form/index"));
 const demo = asyncComponent(() => import("../views/demo/index"));
 const grpc = asyncComponent(() => import("../views/grpc/index"));

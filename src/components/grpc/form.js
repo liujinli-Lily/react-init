@@ -65,7 +65,7 @@ export default class GrpcForm extends Component{
             return message.error('请选择要执行的请求方法');
         }
         const res = await submitjson({addr,method,body:formData} )
-        if(res.ret == 0){
+        if(res.ret === 0){
             this.setState({
                 Response: res,
                 visible: true,

@@ -6,9 +6,6 @@ import 'jsoneditor/dist/jsoneditor.css';
 import './index.scss';
 
 export default class JSONEditorDemo extends Component {
-    constructor(props) {
-        super(props);
-    }
     componentDidMount () {
         const options = {
             mode: 'code',

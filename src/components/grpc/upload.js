@@ -81,7 +81,7 @@ export default class GrpcUpload extends Component{
             customRequest: ({file})=>{
                 const index = file.name.lastIndexOf(".");
                 const ext = file.name.substr(index + 1);
-                if (ext != "proto") {
+                if (ext !== "proto") {
                     message.error("请上传正确格式的文件!");
                     return false;
                 }

@@ -12,7 +12,7 @@ export default class JSONEditorDemo extends Component {
             // 有效值 'view', 'form', 'code', 'text', 'preview'
             onChangeJSON: this.props.onChangeJSON,
             onEditable() {
-                return false;
+                return true;
             },
         };
 

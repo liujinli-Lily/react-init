@@ -135,6 +135,7 @@ export default class GrpcForm extends Component{
                         <div className="mod-json-view">
                             <JSONEditorDemo
                                 json={this.state.formData}
+                                edit={true}
                                 style={{height: '400px'}}
                             />
                         </div>
